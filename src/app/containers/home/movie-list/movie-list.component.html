@@ -1,18 +1,38 @@
 <ng-container *ngIf="(popular$ | async) as popular; else loadingIndicator">
   <div class="clr-row">
-    <ng-container *ngFor="let movie of popular">
+    <ng-container *ngFor="let movie of popular.results">
       <div class="clr-col-12 clr-col-lg-2 clr-col-md-4 clr-col-sm-6">
         <a href="..." class="card clickable">
           <div class="card-img">
-            <img src="/assets/images/high-castle.jpg" alt="..."/>
+            <ng-container *ngIf="(getImagePath(movie) | async) as image; else loadingImage">
+              <img [src]="image" [alt]="movie.original_title"/>
+            </ng-container>
+
+            <!-- ::TODO add proper spinner when image not loaded -->
+            <ng-template #loadingImage>
+              <div class="clr-row clr-flex-row clr-justify-content-center">
+                <p>
+                  <clr-spinner clrSmall></clr-spinner>
+                </p>
+              </div>
+            </ng-template>
           </div>
           <div class="card-block">
-            <ul class="card-text list-unstyled" style="text-align: center">
-              <li>
-                <h5 style="margin-top: 0">{{ movie?.title }}</h5>
+            <!--            <ul class="card-text list-unstyled" style="text-align: center">-->
+            <!--              <li>-->
+            <!--                <h5 style="margin-top: 0">{{ movie?.title }}</h5>-->
+            <!--              </li>-->
+            <!--              <li>-->
+            <!--                <p class="p6" style="font-weight: 600; margin-top: .2rem; color: #0094d2">2017</p>-->
+            <!--              </li>-->
+            <!--            </ul>-->
+            <ul class="card-media-description list-unstyled">
+              <li class="card-media-title">
+                <p style="width: 200px; height: 20px; margin-top: 0; line-height: 1" class="p4" ellipsis
+                   [ellipsis-content]="movie?.title"></p>
               </li>
-              <li>
-                <p class="p6" style="font-weight: 600; margin-top: .2rem; color: #0094d2">2017</p>
+              <li class="card-media-text">
+                <p style="margin-top: 0" class="p5">{{ movie?.release_date | date: 'yyyy' }}</p>
               </li>
             </ul>
           </div>
