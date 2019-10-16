@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeflixUiModule } from './ui/ui.module';
 import { StorageModule } from '@ngx-pwa/local-storage';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { StorageModule } from '@ngx-pwa/local-storage';
   imports: [
     BrowserModule,
     HomeflixUiModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     StorageModule.forRoot({ IDBNoWrap: true })

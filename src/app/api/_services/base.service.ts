@@ -17,7 +17,7 @@ export class BaseService {
    * @param fragment
    */
   protected Url(fragment: string): string {
-    return `${ environment.MOVIES_API_URL }${ fragment }`;
+    return `${ environment.MOVIES_API_CONFIG.url }${ fragment }?api_key=${ environment.MOVIES_API_CONFIG.api_key }&language=${ environment.MOVIES_API_CONFIG.language }`;
   }
 }
 

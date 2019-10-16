@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "stage": "ng build --prod",
     "build": "ng build",
     "hmr": "ng serve --configuration hmr",
     "test": "ng test",

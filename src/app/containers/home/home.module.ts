@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { MovieListComponent } from './movie-list/movie-list.component';
+import { HomeflixUiModule } from '../../ui/ui.module';
 
 const routes: Routes = [
   { path: '', component: MovieListComponent }
@@ -11,7 +12,8 @@ const routes: Routes = [
   declarations: [MovieListComponent],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    HomeflixUiModule
   ],
   exports: [RouterModule]
 })
