@@ -10,7 +10,7 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('alc-mini-netflix app is running!');
+    expect(page.getTitleText()).toEqual('homeflix app is running!');
   });
 
   afterEach(async () => {

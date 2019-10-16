@@ -5,7 +5,8 @@ import { AppComponent } from './app.component';
 import { ClarityModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
-import { MiniNetflixUiModule } from './ui/ui.module';
+import { HomeflixUiModule } from './ui/ui.module';
+import { StorageModule } from '@ngx-pwa/local-storage';
 
 @NgModule({
   declarations: [
@@ -13,9 +14,10 @@ import { MiniNetflixUiModule } from './ui/ui.module';
   ],
   imports: [
     BrowserModule,
-    MiniNetflixUiModule,
+    HomeflixUiModule,
     BrowserAnimationsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    StorageModule.forRoot({ IDBNoWrap: true })
   ],
   providers: [],
   bootstrap: [AppComponent]

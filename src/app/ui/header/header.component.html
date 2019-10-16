@@ -1,0 +1,30 @@
+<header class="header-5">
+  <a [routerLink]="['/browse']" class="branding" style="align-items: center">
+    <h1 class="" style="color: white; margin: 0; line-height: 1">Homeflix</h1>
+  </a>
+
+  <nav class="header-nav">
+    <a class="nav-link nav-text" [routerLink]="['/browse']"
+       routerLinkActive="active">Home</a>
+    <a class="nav-link nav-text" [routerLink]="['/favourites']"
+       routerLinkActive="active">Favourites</a>
+  </nav>
+
+  <nav class="header-actions">
+    <clr-dropdown style="padding-right: 1rem">
+      <div clrDropdownTrigger>
+        <clr-icon shape="user" size="24"></clr-icon>
+        <clr-icon shape="caret down"></clr-icon>
+      </div>
+
+      <clr-dropdown-menu clrPosition="bottom-right">
+        <a [routerLink]="'account'">
+          <div class="dropdown-item"><clr-icon shape="cog"></clr-icon> My account</div>
+        </a>
+        <a>
+          <div class="dropdown-item"><clr-icon shape="power"></clr-icon> Sign out</div>
+        </a>
+      </clr-dropdown-menu>
+    </clr-dropdown>
+  </nav>
+</header>
