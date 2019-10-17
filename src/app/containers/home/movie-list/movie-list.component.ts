@@ -2,7 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MovieService } from '../../../api/_services/movie.service';
 import { Collection, createCollection } from '../../../api/_models/response.model';
 import { Movie } from '../../../api/_models/movie.model';
-import { Observable, of, Subject, Subscription } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
+import { SearchUtilService } from '../../../api/_utilities/search-util.service';
+import { SubSink } from 'subsink';
 
 @Component({
   selector: 'hf-movie-list',
@@ -10,7 +12,7 @@ import { Observable, of, Subject, Subscription } from 'rxjs';
   styleUrls: ['./movie-list.component.css']
 })
 export class MovieListComponent implements OnInit, OnDestroy {
-  private subscription: Subscription;
+  private subsink = new SubSink();
   private popular = createCollection<Movie>();
   private popularSubject$ = new Subject<Collection<Movie>>();
   popular$ = this.popularSubject$.asObservable();
@@ -19,27 +21,54 @@ export class MovieListComponent implements OnInit, OnDestroy {
   private imageUrlSubject$ = new Subject<string>();
   image$ = this.imageUrlSubject$.asObservable();
 
-  constructor(private ms: MovieService) {
+  searchKey: string;
+  mutated: Movie[] = [];
+
+  constructor(
+    private ms: MovieService,
+    private sus: SearchUtilService
+  ) {
   }
 
   ngOnInit() {
-    this.subscription = this.ms.Fetch('popular').subscribe((list) => {
+    /**
+     * Get most popular movies
+     */
+    this.subsink.sink = this.ms.Fetch('popular').subscribe((list) => {
       list.results.map((item => {
         // Get image urls
         this.getImagePath(item);
       }));
       this.popular = list;
+      this.mutated = this.popular.results;
       this.popularSubject$.next(this.popular);
+    });
 
+    /**
+     * Monitor search keywords
+     */
+    this.subsink.sink = this.sus.searchChanged$.subscribe(keyword => {
+      this.searchKey = keyword;
+      if (!keyword) {
+        return this.mutated = this.popular.results;
+      }
+
+      this.mutated = this.popular.results.filter((movie) => {
+        return movie.title.toLowerCase().includes(this.searchKey);
+      });
     });
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.subsink.unsubscribe();
   }
 
   getImagePath(movie: Movie): Observable<string> {
     return of(`https://image.tmdb.org/t/p/w342/${ movie.poster_path }`);
+  }
+
+  movieTracker(index: number, movie: Movie): number {
+    return movie.id;
   }
 
 }

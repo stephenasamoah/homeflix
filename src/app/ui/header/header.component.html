@@ -12,12 +12,16 @@
 
   <form class="search">
     <label for="search_input">
-      <input id="search_input" type="text" placeholder="Search movies...">
+      <input (keyup)="sendKeywords($event.target.value)"
+        id="search_input" type="text" placeholder="Search movies...">
     </label>
   </form>
 
 
-  <nav class="header-actions">
+  <nav class="header-actions clr-align-items-center">
+    <button class="btn btn-primary">Sign up</button>
+    <button class="btn btn-inverse">Login</button>
+
     <clr-dropdown style="padding-right: 1rem">
       <div clrDropdownTrigger>
         <clr-icon shape="user" size="24"></clr-icon>
@@ -26,10 +30,16 @@
 
       <clr-dropdown-menu clrPosition="bottom-right">
         <a [routerLink]="'account'">
-          <div class="dropdown-item"><clr-icon shape="cog"></clr-icon> My account</div>
+          <div class="dropdown-item">
+            <clr-icon shape="cog"></clr-icon>
+            My account
+          </div>
         </a>
         <a>
-          <div class="dropdown-item"><clr-icon shape="power"></clr-icon> Sign out</div>
+          <div class="dropdown-item">
+            <clr-icon shape="power"></clr-icon>
+            Sign out
+          </div>
         </a>
       </clr-dropdown-menu>
     </clr-dropdown>

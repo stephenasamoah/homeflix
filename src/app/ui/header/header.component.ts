@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SearchUtilService } from '../../api/_utilities/search-util.service';
 
 @Component({
   selector: 'hf-header',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private sus: SearchUtilService) {
+  }
 
   ngOnInit() {
   }
 
+  sendKeywords(keywords: string): void {
+    this.sus.headerSearch(keywords);
+  }
 }
