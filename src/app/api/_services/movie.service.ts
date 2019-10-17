@@ -10,8 +10,8 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class MovieService extends BaseService {
-  constructor(protected httpClient: HttpClient) {
-    super(httpClient);
+  constructor(protected http: HttpClient) {
+    super(http);
   }
 
   /**

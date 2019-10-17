@@ -5,6 +5,8 @@ import { Movie } from '../../../api/_models/movie.model';
 import { Subject } from 'rxjs';
 import { SearchUtilService } from '../../../api/_utilities/search-util.service';
 import { SubSink } from 'subsink';
+import { Genre } from '../../../api/_models/genre.model';
+import { GenreService } from '../../../api/_services/genre.service';
 
 @Component({
   selector: 'hf-movie-list',
@@ -27,25 +29,19 @@ export class MovieListComponent implements OnInit, OnDestroy {
   isOpen = false;
   selectedMovie: Movie = {};
 
+  genre: Genre[] = [];
+  selectedGenre: Genre[] = [];
+
   constructor(
     private ms: MovieService,
-    private sus: SearchUtilService
+    private sus: SearchUtilService,
+    private gs: GenreService
   ) {
   }
 
   ngOnInit() {
-    /**
-     * Get most popular movies
-     */
-    this.subsink.sink = this.ms.Fetch('popular').subscribe((list) => {
-      list.results.map((item => {
-        // Get image urls
-        this.getImagePath(item);
-      }));
-      this.popular = list;
-      this.mutated = this.popular.results;
-      this.popularSubject$.next(this.popular);
-    });
+    this.getGenre();
+    this.getPopular();
 
     /**
      * Monitor search keywords
@@ -66,6 +62,29 @@ export class MovieListComponent implements OnInit, OnDestroy {
     this.subsink.unsubscribe();
   }
 
+  /**
+   * Get most popular movies
+   */
+  private getPopular() {
+    this.subsink.sink = this.ms.Fetch('popular').subscribe((list) => {
+      list.results.map((item => {
+        // Get image urls
+        this.getImagePath(item);
+      }));
+      this.popular = list;
+      this.mutated = this.popular.results;
+      this.popularSubject$.next(this.popular);
+    });
+  }
+
+  private getGenre() {
+    if (!this.genre.length) {
+      this.subsink.sink = this.gs.Fetch().subscribe(g => {
+        this.genre = g;
+      });
+    }
+  }
+
   getImagePath(movie: Movie) {
     return (`https://image.tmdb.org/t/p/w342/${ movie.poster_path }`);
   }
@@ -75,6 +94,11 @@ export class MovieListComponent implements OnInit, OnDestroy {
   }
 
   detailsHandler(movie: Movie) {
+    movie.genre_ids.forEach((id => {
+      const mappedGenre: Genre = this.genre.find(g => g.id === id);
+      this.selectedGenre.push(mappedGenre);
+    }));
+
     this.isOpen = true;
     this.selectedMovie = movie;
   }

@@ -1,9 +1,10 @@
-export interface Movie {
+import { BaseModel } from './base.model';
+
+export interface Movie extends BaseModel {
   popularity?: string;
   vote_count?: string;
   video?: boolean;
   poster_path?: string;
-  id?: number;
   adult?: string;
   backdrop_path?: string;
   original_language?: string;

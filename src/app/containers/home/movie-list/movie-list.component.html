@@ -60,12 +60,20 @@
 
             <p>{{ selectedMovie.overview }}</p>
 
+            <!-- Rating and faves -->
             <div style="margin-top: .6rem; display: flex; align-items: center">
               <clr-icon shape="heart" class="is-solid" style="fill: #f54f47; margin-right: .2rem"></clr-icon>
-              {{ selectedMovie.vote_count }}
+              {{ selectedMovie.vote_count }} |
+              <div class="p5" style="margin-top: 0; margin-left: .2rem; display: inline-block">Average rating: <span
+                class="p4">{{ selectedMovie.vote_average }}</span></div>
             </div>
-            <div class="p5" style="margin-top: 0">Average rating: <span
-              class="p4">{{ selectedMovie.vote_average }}</span></div>
+
+            <!-- Genre -->
+            <ng-container *ngIf="selectedGenre.length">
+              <div style="margin-top: .6rem">
+                <span *ngFor="let genre of selectedGenre" class="label">{{ genre.name }}</span>
+              </div>
+            </ng-container>
           </article>
         </div>
       </div>
