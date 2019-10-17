@@ -5,10 +5,11 @@ import { ClarityModule } from '@clr/angular';
 import { HeaderComponent } from './header/header.component';
 import { RouterModule } from '@angular/router';
 import { EllipsisModule } from 'ngx-ellipsis';
+import { MovieDetailsComponent } from './movie-details/movie-details.component';
 
 
 @NgModule({
-  declarations: [LayoutComponent, HeaderComponent],
+  declarations: [LayoutComponent, HeaderComponent, MovieDetailsComponent],
   imports: [
     CommonModule,
     ClarityModule,
@@ -18,7 +19,8 @@ import { EllipsisModule } from 'ngx-ellipsis';
   exports: [
     ClarityModule,
     HeaderComponent,
-    EllipsisModule
+    EllipsisModule,
+    MovieDetailsComponent
   ]
 })
 export class HomeflixUiModule {

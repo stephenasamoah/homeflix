@@ -1,0 +1,9 @@
+<clr-modal [(clrModalOpen)]="isOpen">
+  <h3 class="modal-title">{{ movie?.title }}</h3>
+  <div class="modal-body">
+    <p>{{ movie?.overview }}</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="close()">Close</button>
+  </div>
+</clr-modal>

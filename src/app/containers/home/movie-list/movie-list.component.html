@@ -1,10 +1,10 @@
 <ng-container *ngIf="popular$ | async; else loadingIndicator">
   <div class="clr-row">
     <ng-container *ngFor="let movie of mutated; trackBy: movieTracker">
-      <div class="clr-col-12 clr-col-lg-2 clr-col-md-4 clr-col-sm-6">
-        <a href="..." class="card clickable">
+      <div class="clr-col-12 clr-col-lg-2 clr-col-md-4 clr-col-sm-6" (click)="detailsHandler(movie)">
+        <a class="card clickable">
           <div class="card-img">
-            <ng-container *ngIf="(getImagePath(movie) | async) as image; else loadingImage">
+            <ng-container *ngIf="(getImagePath(movie)) as image">
               <img [src]="image" [alt]="movie.original_title"/>
             </ng-container>
 
@@ -41,6 +41,44 @@
     </ng-container>
   </div>
 </ng-container>
+
+<!--<hf-movie-details [isOpen]="isOpen" [movie]="selectedMovie"></hf-movie-details>-->
+<ng-container *ngIf="selectedMovie?.title">
+  <clr-modal [(clrModalOpen)]="isOpen" clrModalSize="lg" clrModalStaticBackdrop>
+    <div class="modal-body">
+      <div class="clr-row">
+        <div class="clr-col-5">
+          <div class="card" style="margin-top: 0">
+            <img [src]="getImagePath(selectedMovie)" [alt]="selectedMovie.original_title"
+                 style="width: 100%;">
+          </div>
+        </div>
+        <div class="clr-col-7">
+          <article>
+            <h2 style="margin-top: -4px; line-height: 1">{{ selectedMovie.title }}</h2>
+            <h4 style="margin-top: .4rem; line-height: 1">({{ selectedMovie.release_date | date: 'y' }})</h4>
+
+            <p>{{ selectedMovie.overview }}</p>
+
+            <div style="margin-top: .6rem; display: flex; align-items: center">
+              <clr-icon shape="heart" class="is-solid" style="fill: #f54f47; margin-right: .2rem"></clr-icon>
+              {{ selectedMovie.vote_count }}
+            </div>
+            <div class="p5" style="margin-top: 0">Average rating: <span
+              class="p4">{{ selectedMovie.vote_average }}</span></div>
+          </article>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary btn-icon btn-inverse" style="margin-right: 12px">
+        <clr-icon shape="heart" aria-label="to-favourites"></clr-icon>
+        Add to favourites
+      </button>
+    </div>
+  </clr-modal>
+</ng-container>
+
 
 <ng-template #loadingIndicator>
   <div class="clr-row clr-flex-row clr-justify-content-center clr-align-items-center"

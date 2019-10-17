@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MovieService } from '../../../api/_services/movie.service';
 import { Collection, createCollection } from '../../../api/_models/response.model';
 import { Movie } from '../../../api/_models/movie.model';
-import { Observable, of, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { SearchUtilService } from '../../../api/_utilities/search-util.service';
 import { SubSink } from 'subsink';
 
@@ -23,6 +23,9 @@ export class MovieListComponent implements OnInit, OnDestroy {
 
   searchKey: string;
   mutated: Movie[] = [];
+
+  isOpen = false;
+  selectedMovie: Movie = {};
 
   constructor(
     private ms: MovieService,
@@ -63,12 +66,16 @@ export class MovieListComponent implements OnInit, OnDestroy {
     this.subsink.unsubscribe();
   }
 
-  getImagePath(movie: Movie): Observable<string> {
-    return of(`https://image.tmdb.org/t/p/w342/${ movie.poster_path }`);
+  getImagePath(movie: Movie) {
+    return (`https://image.tmdb.org/t/p/w342/${ movie.poster_path }`);
   }
 
   movieTracker(index: number, movie: Movie): number {
     return movie.id;
   }
 
+  detailsHandler(movie: Movie) {
+    this.isOpen = true;
+    this.selectedMovie = movie;
+  }
 }

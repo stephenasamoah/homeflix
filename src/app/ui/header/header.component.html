@@ -1,4 +1,4 @@
-<header class="header-5">
+<header class="header header-1">
   <a [routerLink]="['/browse']" class="branding" style="align-items: center">
     <h1 class="" style="color: white; margin: 0; line-height: 1">Homeflix</h1>
   </a>
@@ -13,7 +13,7 @@
   <form class="search">
     <label for="search_input">
       <input (keyup)="sendKeywords($event.target.value)"
-        id="search_input" type="text" placeholder="Search movies...">
+             id="search_input" type="text" placeholder="Search movies...">
     </label>
   </form>
 
