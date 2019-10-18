@@ -1,13 +1,14 @@
 <h2>Popular on Homeflix&trade;</h2>
+
 <ng-container *ngIf="popular$ | async; else loadingIndicator">
   <div class="clr-row">
     <ng-container *ngFor="let movie of mutated; trackBy: movieTracker">
       <div class="clr-col-12 clr-col-lg-2 clr-col-md-4 clr-col-sm-6" (click)="detailsHandler(movie)">
-        <a class="card clickable">
+        <a class="card clickable" [ngClass]="{'media--selected': movie.selected}">
           <div class="card-img aspect-ratio img__container--massive-sq"
                style="width: 100%">
-            <div *ngIf="(getImagePath(movie)) as image">
-              <img [src]="image" [alt]="movie.original_title"
+            <div *ngIf="(getImagePath(movie?.item)) as image">
+              <img [src]="image" [alt]="movie?.item?.original_title"
                    class="aspect-ratio__content"/>
             </div>
 
@@ -23,7 +24,7 @@
           <div class="card-block">
             <!--            <ul class="card-text list-unstyled" style="text-align: center">-->
             <!--              <li>-->
-            <!--                <h5 style="margin-top: 0">{{ movie?.title }}</h5>-->
+            <!--                <h5 style="margin-top: 0">{{ movie?.item?.title }}</h5>-->
             <!--              </li>-->
             <!--              <li>-->
             <!--                <p class="p6" style="font-weight: 600; margin-top: .2rem; color: #0094d2">2017</p>-->
@@ -32,14 +33,15 @@
             <ul class="card-media-description list-unstyled">
               <li class="card-media-title">
                 <p style="width: 200px; height: 20px; margin-top: 0; line-height: 1" class="p4" ellipsis
-                   [ellipsis-content]="movie?.title"></p>
+                   [ellipsis-content]="movie?.item?.title"></p>
               </li>
               <li class="card-media-text clr-flex-row clr-align-items-center clr-justify-content-between"
                   style="display: flex">
-                <p style="margin-top: 0" class="p5">{{ movie?.release_date | date: 'yyyy' }}</p>
+                <p style="margin-top: 0" class="p5">{{ movie?.item?.release_date | date: 'yyyy' }}</p>
 
                 <clr-tooltip>
-                  <clr-icon shape="heart" size="24" clrTooltipTrigger aria-label="Add to favourites tip"></clr-icon>
+                  <clr-icon shape="heart" size="24" [ngClass]="{'is-solid': movie?.selected}"
+                            clrTooltipTrigger aria-label="Add to favourites tip"></clr-icon>
                   <clr-tooltip-content clrPosition="top-left" clrSize="sm" *clrIfOpen>
                     <span>In favourites</span>
                   </clr-tooltip-content>
@@ -54,30 +56,30 @@
   </div>
 </ng-container>
 
-<!--<hf-movie-details [isOpen]="isOpen" [movie]="selectedMovie"></hf-movie-details>-->
-<ng-container *ngIf="selectedMovie?.title">
+<!--<hf-movie-details [isOpen]="isOpen" [movie]="clickedMovie"></hf-movie-details>-->
+<ng-container *ngIf="clickedMovie?.item.title">
   <clr-modal [(clrModalOpen)]="isOpen" clrModalSize="lg" clrModalStaticBackdrop>
     <div class="modal-body">
       <div class="clr-row">
         <div class="clr-col-5">
           <div class="card" style="margin-top: 0">
-            <img [src]="getImagePath(selectedMovie)" [alt]="selectedMovie.original_title"
+            <img [src]="getImagePath(clickedMovie.item)" [alt]="clickedMovie?.item?.original_title"
                  style="width: 100%;">
           </div>
         </div>
         <div class="clr-col-7">
           <article>
-            <h2 style="margin-top: -4px; line-height: 1">{{ selectedMovie.title }}</h2>
-            <h4 style="margin-top: .4rem; line-height: 1">({{ selectedMovie.release_date | date: 'y' }})</h4>
+            <h2 style="margin-top: -4px; line-height: 1">{{ clickedMovie?.item?.title }}</h2>
+            <h4 style="margin-top: .4rem; line-height: 1">({{ clickedMovie?.item?.release_date | date: 'y' }})</h4>
 
-            <p>{{ selectedMovie.overview }}</p>
+            <p>{{ clickedMovie?.item?.overview }}</p>
 
             <!-- Rating and faves -->
             <div style="margin-top: .6rem; display: flex; align-items: center">
               <clr-icon shape="heart" class="is-solid" style="fill: #f54f47; margin-right: .2rem"></clr-icon>
-              {{ selectedMovie.vote_count }} |
+              {{ clickedMovie?.item?.vote_count }} |
               <div class="p5" style="margin-top: 0; margin-left: .2rem; display: inline-block">Average rating: <span
-                class="p4">{{ selectedMovie.vote_average }}</span></div>
+                class="p4">{{ clickedMovie?.item?.vote_average }}</span></div>
             </div>
 
             <!-- Genre -->
@@ -91,10 +93,28 @@
       </div>
     </div>
     <div class="modal-footer">
-      <button class="btn btn-primary btn-icon btn-outline" style="margin-right: 12px">
-        <clr-icon shape="heart" aria-label="to-favourites"></clr-icon>
-        Add to favourites
-      </button>
+      <ng-container *ngIf="!clickedMovie.selected; else removeTemplate">
+        <button (click)="addToFaves(clickedMovie)" [disabled]="faveProgress"
+                class="btn btn-primary btn-icon" style="margin-right: 12px">
+
+
+          <clr-icon shape="heart" aria-label="to-favourites"></clr-icon>
+          <ng-container *ngIf="!faveProgress; else addingTemplate"> Add to favourites</ng-container>
+        </button>
+        <ng-template #addingTemplate> Adding...</ng-template>
+      </ng-container>
+
+      <ng-template #removeTemplate>
+        <button (click)="addToFaves(clickedMovie)" [disabled]="faveProgress"
+                class="btn btn-primary btn-icon btn-outline" style="margin-right: 12px">
+          <clr-icon shape="uninstall" aria-label="to-favourites"></clr-icon>
+          <ng-container *ngIf="!faveProgress; else removingTemplate"> In favourites</ng-container>
+        </button>
+
+        <ng-template #removingTemplate>
+          Removing...
+        </ng-template>
+      </ng-template>
     </div>
   </clr-modal>
 </ng-container>
