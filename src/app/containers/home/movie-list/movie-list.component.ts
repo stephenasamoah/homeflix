@@ -94,6 +94,8 @@ export class MovieListComponent implements OnInit, OnDestroy {
   }
 
   detailsHandler(movie: Movie) {
+    this.selectedGenre = [];
+
     movie.genre_ids.forEach((id => {
       const mappedGenre: Genre = this.genre.find(g => g.id === id);
       this.selectedGenre.push(mappedGenre);

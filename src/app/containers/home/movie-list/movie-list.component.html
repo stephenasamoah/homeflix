@@ -31,8 +31,10 @@
                 <p style="width: 200px; height: 20px; margin-top: 0; line-height: 1" class="p4" ellipsis
                    [ellipsis-content]="movie?.title"></p>
               </li>
-              <li class="card-media-text">
+              <li class="card-media-text clr-flex-row clr-align-items-center clr-justify-content-between"
+                  style="display: flex">
                 <p style="margin-top: 0" class="p5">{{ movie?.release_date | date: 'yyyy' }}</p>
+                <clr-icon shape="heart" style="margin-right: .2rem"></clr-icon>
               </li>
             </ul>
           </div>
