@@ -854,22 +854,22 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@clr/angular@^3.0.0-next.1":
-  version "3.0.0-next.1"
-  resolved "https://registry.yarnpkg.com/@clr/angular/-/angular-3.0.0-next.1.tgz#cd8d86edc1d1120f2d3b3cf0573a56e354202fd2"
-  integrity sha512-yt4ekRgL6ujr7DD+SehyU0YbjhnlP+OzujgIe0emSWHkTtN4Sgj3wW+jNIO2tcobWc3DdDoHEYxQdmOesbdLfw==
+"@clr/angular@3.0.0-next.2":
+  version "3.0.0-next.2"
+  resolved "https://registry.yarnpkg.com/@clr/angular/-/angular-3.0.0-next.2.tgz#459878ebed70d72d7e44a735691bbe373a4aa169"
+  integrity sha512-NSJ/em+9S0OaPMrU95TVyqidBKAASvLLQNqBn5o3GG4AcwjhWlQxoLpYsuQVktjABZySDKAvnXDobtoGT4zCOg==
   dependencies:
     tslib "^1.9.0"
 
-"@clr/icons@3.0.0-next.1":
-  version "3.0.0-next.1"
-  resolved "https://registry.yarnpkg.com/@clr/icons/-/icons-3.0.0-next.1.tgz#2dec8765ae647f053a4435a69c1213873b2342a9"
-  integrity sha512-Q7HvpmeItoPqWEiwmiGcREVMvESuO2d2kXJ0duU/JVLUjN5omCo7UZQFHi7SJnCtbkcpYWr0x+IF7c0Ssf++Kg==
+"@clr/icons@3.0.0-next.2":
+  version "3.0.0-next.2"
+  resolved "https://registry.yarnpkg.com/@clr/icons/-/icons-3.0.0-next.2.tgz#eec981ab86985c085f795136d130dcf6ca060e4a"
+  integrity sha512-Rib50Hqy9XdWQnjDHpsLBFXcWLZNh2FRnTIYbb4Lxq6EWyrsj1ZCpdK59D3OobYFnDC9yoX+c04rMSGtXEZ+MQ==
 
-"@clr/ui@3.0.0-next.1":
-  version "3.0.0-next.1"
-  resolved "https://registry.yarnpkg.com/@clr/ui/-/ui-3.0.0-next.1.tgz#a6c4bf11251a2adee2846493da8b52a444aab2bc"
-  integrity sha512-jALTLLT/h9P9kJrAcVOCRx87PgFxnf/3dg1ld4pqfoN/MccIIif94NCychYRT/f3h5DUQIOVROX88TUfkWoBTA==
+"@clr/ui@3.0.0-next.2":
+  version "3.0.0-next.2"
+  resolved "https://registry.yarnpkg.com/@clr/ui/-/ui-3.0.0-next.2.tgz#6bd537daab1e8e8754fc6a51b938a5799376183e"
+  integrity sha512-zQW4zpq6lnlAkDlyifrHpMe+43W6OLnvM65Sfqu87zQ10u5219UvCuKmPdTZsB3h6m67ExJ3+0bz/wdq/+S6hQ==
 
 "@ngtools/webpack@8.3.9":
   version "8.3.9"

@@ -1,0 +1,187 @@
+.img {
+  // ***************************
+  // #Container
+  // ***************************/
+  &__container {
+    display: inline-block;
+
+    svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    &--massive { // massive
+      width: 11.2rem;
+
+      &-sq {
+        height: 11.2rem;
+      }
+    }
+
+    &--huge { // huge
+      width: 7.2rem;
+
+      &-sq {
+        height: 7.2rem;
+      }
+    }
+
+    &--large { // Large
+      width: 6rem;
+
+      &-sq {
+        height: 6rem;
+      }
+    }
+
+    &--medium { // Medium
+      width: 4.8rem;
+
+      &-sq {
+        height: 4.8rem;
+      }
+    }
+
+    &--mini { // mini
+      width: 3.6rem;
+
+      &-sq {
+        height: 3.6rem;
+      }
+    }
+
+    &--small { // Small
+      width: 2.4rem;
+
+      &-sq {
+        height: 2.4rem;
+      }
+    }
+
+    &--tiny { // #Tiny
+      width: 1.6rem;
+
+      &-sq {
+        height: 1.6rem;
+      }
+    }
+
+    &--micro {
+      width: 1.2rem;
+      height: 1.2rem;
+    }
+  }
+
+  // ***************************
+  // #Gallery
+  // ***************************/
+
+  &-gallery {
+    display: block;
+
+    /* === #Item === */
+
+    &__item {
+      cursor: pointer;
+
+      &:hover {
+        .img-gallery__overlay {
+          opacity: 1;
+        }
+      }
+    }
+
+    /* === #Overlay === */
+
+    &__overlay {
+      @extend %pseudo-global;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: rgba(96, 124, 138, .65);
+      cursor: pointer;
+      transition: opacity .2s ease-out;
+
+      &--actions { // Overlay actions
+        display: flex;
+        justify-content: center;
+        height: 100%;
+        align-items: center;
+
+        i {
+          color: $color-white;
+          cursor: pointer;
+          line-height: 1;
+          margin: 0;
+        }
+      }
+    }
+
+    &__previewer {
+      width: 100%;
+      height: 48vh;
+
+      @media (min-width: 768px) {
+        width: 36rem;
+        height: 36rem;
+      }
+    }
+
+  }
+}
+
+
+.aspect-ratio {
+  position: relative;
+  display: inline-block;
+  background-color: $color-white;
+  line-height: 1;
+  overflow: hidden;
+
+  &--bordered {
+    border: 1px solid $color-grey-ult-light;
+  }
+
+  // ***************************
+  // #Content
+  // ***************************/
+  &__content { //** Fallback
+    position: absolute;
+    top: 50%;
+    right: 0;
+    bottom: 0;
+    left: 50%;
+    max-width: 100%;
+    transform: translate(-50%, -50%);
+
+    @supports (object-fit: cover) {
+      &--cover { // cover
+        position: static;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        object-fit: cover;
+        transform: none;
+      }
+    }
+  }
+}
+
+// ==========================================================================
+// #OVERRIDES
+// ==========================================================================
+.aspect-ratio {
+  &.card-img {
+    border-top-left-radius: .15rem;
+    border-top-right-radius: .15rem;
+    width: 100%;
+  }
+}

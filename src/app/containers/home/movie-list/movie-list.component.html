@@ -1,12 +1,15 @@
+<h2>Popular on Homeflix&trade;</h2>
 <ng-container *ngIf="popular$ | async; else loadingIndicator">
   <div class="clr-row">
     <ng-container *ngFor="let movie of mutated; trackBy: movieTracker">
       <div class="clr-col-12 clr-col-lg-2 clr-col-md-4 clr-col-sm-6" (click)="detailsHandler(movie)">
         <a class="card clickable">
-          <div class="card-img">
-            <ng-container *ngIf="(getImagePath(movie)) as image">
-              <img [src]="image" [alt]="movie.original_title"/>
-            </ng-container>
+          <div class="card-img aspect-ratio img__container--massive-sq"
+               style="width: 100%">
+            <div *ngIf="(getImagePath(movie)) as image">
+              <img [src]="image" [alt]="movie.original_title"
+                   class="aspect-ratio__content"/>
+            </div>
 
             <!-- ::TODO add proper spinner when image not loaded -->
             <ng-template #loadingImage>
@@ -34,7 +37,14 @@
               <li class="card-media-text clr-flex-row clr-align-items-center clr-justify-content-between"
                   style="display: flex">
                 <p style="margin-top: 0" class="p5">{{ movie?.release_date | date: 'yyyy' }}</p>
-                <clr-icon shape="heart" style="margin-right: .2rem"></clr-icon>
+
+                <clr-tooltip>
+                  <clr-icon shape="heart" size="24" clrTooltipTrigger aria-label="Add to favourites tip"></clr-icon>
+                  <clr-tooltip-content clrPosition="top-left" clrSize="sm" *clrIfOpen>
+                    <span>In favourites</span>
+                  </clr-tooltip-content>
+                </clr-tooltip>
+
               </li>
             </ul>
           </div>
@@ -81,7 +91,7 @@
       </div>
     </div>
     <div class="modal-footer">
-      <button class="btn btn-primary btn-icon btn-inverse" style="margin-right: 12px">
+      <button class="btn btn-primary btn-icon btn-outline" style="margin-right: 12px">
         <clr-icon shape="heart" aria-label="to-favourites"></clr-icon>
         Add to favourites
       </button>
@@ -91,8 +101,8 @@
 
 
 <ng-template #loadingIndicator>
-  <div class="clr-row clr-flex-row clr-justify-content-center clr-align-items-center"
-       style="height: calc(100% - 84px);">
+  <div class="clr-row clr-flex-row clr-justify-content-center clr-align-items-center">
+    <!--       style="height: calc(100% - 84px);">-->
     <clr-spinner></clr-spinner>
   </div>
 </ng-template>

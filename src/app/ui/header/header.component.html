@@ -19,29 +19,41 @@
 
 
   <nav class="header-actions clr-align-items-center">
-    <button class="btn btn-primary">Sign up</button>
-    <button class="btn btn-inverse">Login</button>
+    <!-- Sign up -->
+    <ng-container *ngIf="!user">
+      <ul class="list-unstyled" style="display: flex; padding-right: .6rem">
+        <li>
+          <button class="btn btn-primary">Sign up</button>
+        </li>
+        <li>
+          <button class="btn btn-outline">Login</button>
+        </li>
+      </ul>
+    </ng-container>
 
-    <clr-dropdown style="padding-right: 1rem">
-      <div clrDropdownTrigger>
-        <clr-icon shape="user" size="24"></clr-icon>
-        <clr-icon shape="caret down"></clr-icon>
-      </div>
+    <!-- Log in -->
+    <ng-container *ngIf="user">
+      <clr-dropdown style="padding-right: 1rem">
+        <div clrDropdownTrigger>
+          <clr-icon shape="user" size="24"></clr-icon>
+          <clr-icon shape="caret down"></clr-icon>
+        </div>
 
-      <clr-dropdown-menu clrPosition="bottom-right">
-        <a [routerLink]="'account'">
-          <div class="dropdown-item">
-            <clr-icon shape="cog"></clr-icon>
-            My account
-          </div>
-        </a>
-        <a>
-          <div class="dropdown-item">
-            <clr-icon shape="power"></clr-icon>
-            Sign out
-          </div>
-        </a>
-      </clr-dropdown-menu>
-    </clr-dropdown>
+        <clr-dropdown-menu clrPosition="bottom-right">
+          <a [routerLink]="'account'">
+            <div class="dropdown-item">
+              <clr-icon shape="cog"></clr-icon>
+              My account
+            </div>
+          </a>
+          <a>
+            <div class="dropdown-item">
+              <clr-icon shape="power"></clr-icon>
+              Sign out
+            </div>
+          </a>
+        </clr-dropdown-menu>
+      </clr-dropdown>
+    </ng-container>
   </nav>
 </header>
