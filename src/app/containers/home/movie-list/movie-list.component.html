@@ -7,10 +7,10 @@
         <a class="card clickable" [ngClass]="{'media--selected': movie.selected}">
           <div class="card-img aspect-ratio img__container--massive-sq"
                style="width: 100%">
-            <div *ngIf="(getImagePath(movie?.item)) as image">
+            <ng-container *ngIf="(getImagePath(movie?.item)) as image">
               <img [src]="image" [alt]="movie?.item?.original_title"
                    class="aspect-ratio__content"/>
-            </div>
+            </ng-container>
 
             <!-- ::TODO add proper spinner when image not loaded -->
             <ng-template #loadingImage>

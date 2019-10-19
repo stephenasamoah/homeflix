@@ -22,10 +22,11 @@
     <!-- Sign up -->
     <ng-container *ngIf="!user">
       <ul class="list-unstyled" style="display: flex; padding-right: .6rem">
-        <li>
+        <li [routerLink]="['/auth/signup']" role="link">
           <button class="btn btn-primary">Sign up</button>
         </li>
-        <li>
+
+        <li [routerLink]="['/auth/login']" role="link">
           <button class="btn btn-outline">Login</button>
         </li>
       </ul>

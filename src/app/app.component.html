@@ -1,8 +1,4 @@
-<clr-main-container>
-  <hf-header></hf-header>
-  <div class="content-container">
-    <main class="content-area">
-      <router-outlet></router-outlet>
-    </main>
-  </div>
-</clr-main-container>
+<ng-container [ngSwitch]="currLayout">
+  <hf-dashboard-layout *ngSwitchCase="Layouts.Dashboard"></hf-dashboard-layout>
+  <hf-footeristic-layout *ngSwitchCase="Layouts.Footeristic"></hf-footeristic-layout>
+</ng-container>

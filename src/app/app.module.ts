@@ -8,6 +8,7 @@ import { HomeflixUiModule } from './ui/ui.module';
 import { StorageModule } from '@ngx-pwa/local-storage';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ResponseInterceptor } from './api/_services/interceptors/response.interceptor.service';
+import { LayoutModule } from './ui/layout/layout.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ResponseInterceptor } from './api/_services/interceptors/response.inter
     HttpClientModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    LayoutModule,
     StorageModule.forRoot({ IDBNoWrap: true })
   ],
   providers: [
