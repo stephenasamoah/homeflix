@@ -11,11 +11,11 @@ import { FavouritesService } from '../../../api/_services/favourites.service';
 import { Selectable } from '../../../api/_utilities/types';
 
 @Component({
-  selector: 'hf-movie-list',
-  templateUrl: './movie-list.component.html',
-  styleUrls: ['./movie-list.component.css']
+  selector: 'hf-popular-list',
+  templateUrl: './popular-list.component.html',
+  styleUrls: ['./popular-list.component.css']
 })
-export class MovieListComponent implements OnInit, OnDestroy {
+export class PopularListComponent implements OnInit, OnDestroy {
   private subsink = new SubSink();
   private popular = createCollection<Selectable<Movie>>();
   private popularSubject$ = new Subject<Collection<Selectable<Movie>>>();
@@ -112,13 +112,13 @@ export class MovieListComponent implements OnInit, OnDestroy {
   /**
    * Add to favourites
    */
-  addToFaves(movie: Selectable<Movie>): void {
+  addHandler(movie: Selectable<Movie>): void {
     this.faveProgress = true;
     setTimeout(() => {
       movie.selected = !movie.selected;
 
       this.fvs.setFavourites(movie);
       this.faveProgress = false;
-    }, 1200);
+    }, 240);
   }
 }

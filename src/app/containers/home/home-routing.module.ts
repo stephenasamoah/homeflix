@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { MovieListComponent } from './movie-list/movie-list.component';
+import { PopularListComponent } from './popular-list/popular-list.component';
 
 const routes: Routes = [
-  { path: '', component: MovieListComponent }
+  { path: '', component: PopularListComponent }
 ];
 
 @NgModule({

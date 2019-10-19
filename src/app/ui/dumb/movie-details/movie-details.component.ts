@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Movie } from '../../api/_models/movie.model';
+import { Movie } from '../../../api/_models/movie.model';
 
 @Component({
   selector: 'hf-movie-details',

@@ -4,14 +4,16 @@ import { ClarityModule } from '@clr/angular';
 import { HeaderComponent } from './header/header.component';
 import { RouterModule } from '@angular/router';
 import { EllipsisModule } from 'ngx-ellipsis';
-import { MovieDetailsComponent } from './movie-details/movie-details.component';
+import { MovieDetailsComponent } from './dumb/movie-details/movie-details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MovieListComponent } from './dumb/movie-list/movie-list.component';
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    MovieDetailsComponent
+    MovieDetailsComponent,
+    MovieListComponent,
   ],
   imports: [
     CommonModule,

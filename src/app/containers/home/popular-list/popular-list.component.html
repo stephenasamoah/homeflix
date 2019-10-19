@@ -94,7 +94,7 @@
     </div>
     <div class="modal-footer">
       <ng-container *ngIf="!clickedMovie.selected; else removeTemplate">
-        <button (click)="addToFaves(clickedMovie)" [disabled]="faveProgress"
+        <button (click)="addHandler(clickedMovie)" [disabled]="faveProgress"
                 class="btn btn-primary btn-icon" style="margin-right: 12px">
 
 
@@ -105,7 +105,7 @@
       </ng-container>
 
       <ng-template #removeTemplate>
-        <button (click)="addToFaves(clickedMovie)" [disabled]="faveProgress"
+        <button (click)="addHandler(clickedMovie)" [disabled]="faveProgress"
                 class="btn btn-primary btn-icon btn-outline" style="margin-right: 12px">
           <clr-icon shape="uninstall" aria-label="to-favourites"></clr-icon>
           <ng-container *ngIf="!faveProgress; else removingTemplate"> In favourites</ng-container>

@@ -9,14 +9,21 @@ import { Selectable } from '../_utilities/types';
 export class FavouritesService {
   latestFavourites$: Selectable<Movie>[] = [];
   private favouritesSubject$ = new BehaviorSubject<Selectable<Movie>[]>(this.latestFavourites$);
-  private favouritesChanged$ = this.favouritesSubject$.asObservable();
+  favouritesChanged$ = this.favouritesSubject$.asObservable();
 
   constructor() {
   }
 
   setFavourites(movie: Selectable<Movie>) {
-    this.latestFavourites$.push(movie);
+    const lastItemIndex = this.latestFavourites$.indexOf(movie);
+    if (lastItemIndex === -1) { // check if movie already added
+      this.latestFavourites$.push(movie);
+      this.favouritesSubject$.next(this.latestFavourites$);
+      console.log(this.latestFavourites$);
+      return;
+    }
+
+    this.latestFavourites$ = this.latestFavourites$.filter((m) => m.item !== movie.item);
     this.favouritesSubject$.next(this.latestFavourites$);
-    console.log(this.latestFavourites$);
   }
 }
