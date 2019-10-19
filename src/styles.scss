@@ -1,2 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import "assets/stylesheets/scss/index";
+
+.login-wrapper {
+  //flex-direction: row-reverse;
+  //background-color: #fafafa;
+  background-image: url("/assets/images/star-wars.jpg");
+  //background-size: contain;
+  background-position: 12rem;
+  //overflow: hidden;
+
+  .login {
+    //padding-left: 0;
+  }
+}

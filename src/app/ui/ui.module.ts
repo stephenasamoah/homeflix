@@ -5,6 +5,7 @@ import { HeaderComponent } from './header/header.component';
 import { RouterModule } from '@angular/router';
 import { EllipsisModule } from 'ngx-ellipsis';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -16,13 +17,17 @@ import { MovieDetailsComponent } from './movie-details/movie-details.component';
     CommonModule,
     ClarityModule,
     RouterModule,
-    EllipsisModule
+    EllipsisModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     ClarityModule,
     HeaderComponent,
     EllipsisModule,
-    MovieDetailsComponent
+    MovieDetailsComponent,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class HomeflixUiModule {

@@ -4,6 +4,7 @@ import { HomeflixUiModule } from '../../ui/ui.module';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { AuthRoutingModule } from './auth-routing.module';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 
 

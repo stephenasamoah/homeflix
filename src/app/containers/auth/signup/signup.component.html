@@ -1,1 +1,44 @@
-<p>signup works!</p>
+<section class="login-wrapper">
+  <form clrForm [formGroup]="signupForm" class="login">
+    <section class="title">
+      <h3 class="welcome">Sign up for your</h3>
+      Homeflix account
+      <h5 class="hint">Keep up with your favourite movies and TV shows!</h5>
+    </section>
+
+    <div class="login-group">
+      <clr-input-container>
+        <label class="clr-sr-only">Username</label>
+        <input clrInput formControlName="full_name"
+               name="full_name" id="full_name" placeholder="Full name">
+        <clr-control-helper>e.g. Arnold Schwarzenegger</clr-control-helper>
+        <clr-control-error>Full name is required</clr-control-error>
+      </clr-input-container>
+
+      <clr-input-container>
+        <label class="clr-sr-only">Email</label>
+        <input clrInput formControlName="email"
+               name="email" id="email" placeholder="Email">
+        <clr-control-helper>e.g. banana@republic.com</clr-control-helper>
+        <clr-control-error>Email is required</clr-control-error>
+      </clr-input-container>
+
+      <clr-password-container>
+        <label class="clr-sr-only">Password</label>
+        <input clrPassword formControlName="password"
+               type="password" name="password"  placeholder="Password" />
+        <clr-control-helper>Make your password as unique as possible</clr-control-helper>
+        <clr-control-error>Password is required</clr-control-error>
+      </clr-password-container>
+
+      <clr-checkbox-wrapper>
+        <label>By signing up, I agree to the <a href="javascript://">Terms and conditions</a>.</label>
+        <input type="checkbox" name="agree" clrCheckbox />
+      </clr-checkbox-wrapper>
+
+      <button type="submit" class="btn btn-primary">Create account</button>
+     <a [routerLink]="['/auth/login']" class="signup">Already have an account?  Login in here</a>
+    </div>
+
+  </form>
+</section>
